@@ -56,17 +56,47 @@ getParametersBitcoinGBM <- function(S, dt=1) {
 }
 
 
+
+
 gbm_loop <- function(nsim = 100, t = 25, mu = 0, sigma = 0.1, S0 = 100, dt = 1./365) {
   gbm <- matrix(ncol = nsim, nrow = t)
   for (simu in 1:nsim) {
     gbm[1, simu] <- S0
     for (day in 2:t) {
       epsilon <- rnorm(1)
-      dt = 1 / 365
       gbm[day, simu] <- gbm[(day-1), simu] * exp((mu - sigma * sigma / 2) * dt + sigma * epsilon * sqrt(dt))
     }
   }
   return(gbm)
 }
 
+
+bondPrice <- function(theta_RN, alpha, sigma_t, r_current, T, t) {
+  exp(
+    - ((theta_RN / alpha) * (T - t) +
+         1/alpha * (r_current - theta_RN / alpha) * (1 - exp(-alpha * (T - t))) -
+         1/2 * sigma_t^2)
+  )
+}
+
+implicit_theta_RN <- function(P_market, alpha, sigma_t, r_current, T, t) {
+  theta_RN_values <- seq(0.001, 2, by = 0.001)  
+  for (theta_RN in theta_RN_values) {
+    diff <- abs(P_market - bondPrice(theta_RN, alpha, sigma_t, r_current, T, t))
+    if ((diff) < 0.000001) {
+      return(theta_RN)
+    }
+  }
+  return(NA)  
+}
+
+obj <- function(bondPricesLeft, bondPricesRight) {
+  return(sum( (bondPricesLeft - bondPricesRight)^2  ))
+}
+
+objWrapper <- function(thetha) {
+  # reads from context ...
+  bondPricesRight <- bondPrice(thetha, mleVasicek$alpha, sigma_t, r_tForCalibration, T, t)
+  return(obj(bondPricesLeft, bondPricesRight))
+}
 

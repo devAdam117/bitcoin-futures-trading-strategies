@@ -5,7 +5,6 @@ gbm_loop <- function(nsim = 100, t = 25, mu = 0, sigma = 0.1, S0 = 100, dt = 1./
     gbm[1, simu] <- S0
     for (day in 2:t) {
       epsilon <- rnorm(1)
-      dt = 1 / 365
       gbm[day, simu] <- gbm[(day-1), simu] * exp((mu - sigma * sigma / 2) * dt + sigma * epsilon * sqrt(dt))
     }
   }

@@ -1,0 +1,31 @@
+
+
+
+Start                     2022-10-31 12:00:00
+End                       2023-04-05 17:45:00
+Duration                    156 days 05:45:00
+Exposure Time [%]                   82.153333
+Equity Final [$]                 1014672.9978
+Equity Peak [$]                    1053738.89
+Return [%]                             1.4673
+Buy & Hold Return [%]               35.555975
+Return (Ann.) [%]                     3.54419
+Volatility (Ann.) [%]                 6.02689
+Sharpe Ratio                         0.588063
+Sortino Ratio                        1.475352
+Calmar Ratio                         0.933362
+Max. Drawdown [%]                   -3.797232
+Avg. Drawdown [%]                   -0.472751
+Max. Drawdown Duration      146 days 01:15:00
+Avg. Drawdown Duration        7 days 02:09:00
+# Trades                                  525
+Win Rate [%]                         46.47619
+Best Trade [%]                       3.812099
+Worst Trade [%]                      -3.20846
+Avg. Trade [%]                       0.013047
+Max. Trade Duration          13 days 13:30:00
+...
+_strategy                  CorrelationFriends
+_equity_curve                             ...
+_trades                        Size  Entry...
+dtype: object

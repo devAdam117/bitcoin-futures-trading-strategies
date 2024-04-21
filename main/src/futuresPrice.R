@@ -33,7 +33,7 @@ exchangeFutureValues <- rev(as.numeric(gsub(",", "", exchangeFuturesPrice[, 2]))
 btcValues <- btcPrice[, 5]
 daysBack <- min(length(btcValues), length(exchangeFutureValues), length(rateValues))  - 1
 r_t <- rateValues[(length(rateValues) - daysBack): length(rateValues)] / 100
-S_t <- btcValues[(length(btcValues) - daysBack): length(btcValues)]
+S_t <- as.numeric(gsub(",", "", btcValues[(length(btcValues) - daysBack): length(btcValues)]))
 f_t <- exchangeFutureValues[(length(exchangeFutureValues) - daysBack): length(exchangeFutureValues)]
 T <- 1
 t <- rev((365 - ((45 -  daysBack ): 45))/365)

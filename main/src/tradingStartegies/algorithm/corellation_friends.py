@@ -22,6 +22,24 @@ class CorrelationFriends(Strategy):
     def initiate_variables(self):
         i = 0
         friends = []
+        print('initiate_variables')
+        try:
+            self.safe_area_width = self.data['safe_area_width'][0]
+        except:
+             pass
+        try:
+            self.profit_take = self.data['profit_take'][0]
+        except:
+            pass
+        try:
+            self.loss_take = self.data['loss_take'][0]
+        except:
+            pass
+        try:
+            self.level_multi = self.data['level_multi'][0]
+        except:
+            pass
+
         try:
             while self.data['friend_{}'.format(i)]:
                 friends.append(self.data['friend_{}'.format(i)])
@@ -34,7 +52,7 @@ class CorrelationFriends(Strategy):
             self.initiate_variables()
             self.upper_bound = self.I(self.create_indicator, 1 + self.safe_area_width)
             self.bottom_bound = self.I(self.create_indicator, 1 - self.safe_area_width)
-            # print('Using safe area width: {} with take_profit: {} and stop_lost: {}'.format(self.safe_area_width, self.profit_take, self.loss_take))
+            print('Using safe area width: {} with take_profit: {} and stop_lost: {}'.format(self.safe_area_width, self.profit_take, self.loss_take))
             # print(self.safe_area_width)
         
 

@@ -5,3 +5,4 @@
 **/*.RData
 **/*.Rhistory
 **/*.png
+**/.ipynb_checkpoints/
