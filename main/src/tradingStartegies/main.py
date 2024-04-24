@@ -3,6 +3,7 @@ from algorithm.corellation_friends import CorrelationFriends
 from algorithm.uno_uno import UnoUno
 from algorithm.example import SmaCross
 from algorithm.arbi_check import ArbiCheck
+from algorithm.klam import Klam
 from backtesting import Backtest
 from backtesting.test import GOOG
 import pandas as pd
@@ -10,20 +11,11 @@ import numpy as np
 import backtesting
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-
-btc_data = pd.read_csv('./data/15m2024_02_04_to_2024_02_10/BTC.csv', parse_dates=True, infer_datetime_format=True)
-contactt_data = pd.read_csv('./data/arbitrageDataCheck/futures231229.csv', parse_dates=True, infer_datetime_format=True)
-contactt_data['spot_price'] = pd.read_csv('./data/arbitrageDataCheck/btcSpot231229.csv')['Close']
+date_string = '231229'
+contactt_data = pd.read_csv(f'./data/arbitrageDataCheck/futures{date_string}.csv', parse_dates=True, infer_datetime_format=True)
+contactt_data['spot_price'] = pd.read_csv(f'./data/arbitrageDataCheck/btcSpot{date_string}.csv')['Close']
+contactt_data['theoretical_futures'] = pd.read_csv(f'./data/klam/theoreticalFutures{date_string}.csv')['Close']
 print(contactt_data.head())
-for index, value in enumerate(btc_data['open_time']):
-    try:
-        pd.to_datetime(value, unit='ms')
-    except ValueError:
-        print(f"Value at index {index} is problematic: {value}")
-btc_data['open_time'] = pd.to_datetime(btc_data['open_time'], unit='ms') 
-btc_data.set_index('open_time', inplace=True)
-
-
 for index, value in enumerate(contactt_data['open_time']):
     try:
         pd.to_datetime(value, unit='ms')
@@ -33,33 +25,25 @@ for index, value in enumerate(contactt_data['open_time']):
 contactt_data['open_time'] = pd.to_datetime(contactt_data['open_time'], unit='ms')
 contactt_data.set_index('open_time', inplace=True)
 
+klam = Backtest(contactt_data, Klam, cash=1_000_000, commission=.002)
+print(klam.run())
+klam.plot(resample=False, plot_volume=True, plot_drawdown=True)
 
+# sl = [0.01, 0.02, 0.04, 0.07]
+# tp = [0.01, 0.02, 0.04, 0.07]
+# min_base_diff = [1, 10, 100, 200, 400, 600, 900]
+# optimal_size = [0.1, 0.2, 0.5, 1, 2]
+# optimize_result = klam.optimize(
+#             optimal_size = optimal_size,
+#             sl=sl,
+#             tp=tp,
+#             min_base_diff=min_base_diff,
+#             maximize='Equity Final [$]',
+#             method='skopt',
+#             max_tries=1500,
+#             random_state=0,
+#             return_optimization=True,
+#             return_heatmap=True,
+#         )
 
-print(contactt_data.head())
-
-btc_data = btc_data.iloc[:73920]
-train_btc_datAa = btc_data.iloc[:30000]
-test_btc_data = btc_data.iloc[30000:73920]
-
-# train_btc_datAa['safe_area_width'] = 0.01
-# train_btc_datAa['profit_take'] = 0.01
-# train_btc_datAa['loss_take'] = 0.01
-# train_btc_datAa['level_multi'] = 3
-# print(train_btc_datAa.head())
-
-train_contract_data = contactt_data.iloc[:30000]
-algos = dict(
-    example = Backtest(GOOG, SmaCross, cash=10_000, commission=.002),
-    correlation_friends_v_01 = Backtest(train_btc_datAa, CorrelationFriends, cash=1_000_000, commission=.002),
-    correlation_friends_v_02 = None, # this will be created later on,
-    uno_uno = Backtest(train_contract_data, UnoUno, cash = 1_000_000, commission=.002),
-    arbi_check = Backtest(train_contract_data, ArbiCheck, cash=100_000_000, commission=0)
-)
-ret = algos['arbi_check'].run()
-algos['arbi_check'].plot(resample=False, plot_volume=True, plot_drawdown=True)
-print(ret)
-
-
-
-
-
+# # print(optimize_result)
