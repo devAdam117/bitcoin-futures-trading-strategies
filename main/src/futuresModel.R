@@ -50,7 +50,7 @@ rateClose <- merged_df[,5] / 100
 
 # Now create theoretical formula for futures for given period
 T <- 1
-t <- (1:153)/153
+t <- (1:length(rateClose))/length(rateClose)
 sigma_t <- sqrt(mleVasicek$sigma^2 * (T - t) - 2 * mleVasicek$sigma^2 * (1 - exp(-(T - t))) + mleVasicek$sigma^2 * (1 - exp(-2*(T - t))))
 P_t <- exp(
   - ((mleVasicek$thetha / mleVasicek$alpha) * (T - t) +
