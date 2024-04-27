@@ -22,6 +22,8 @@ futuresPrice(S_now, P_now , mleVasicek$sigma, mleVasicek$alpha, 1, sigHat, corHa
 # 43960 burza vs 43725.85 model
 
 
+
+
 # podme si pozriet celkovy vyvoj predosleho futures kontraktu spolu s porovnanim vyvoja trhovej ceny za danych 45 dni existencie kontraktu
 
 exchangeFuturesPrice <- read.csv("../data/daily/bitcoinFutures.csv",  sep = ',')

@@ -96,8 +96,8 @@ df <- data.frame(
 
 p <- ggplot(df, aes(x = Time)) +
   geom_line(aes(y = log(P_t), color = "P(t,T)")) +
-  geom_line(aes(y = r_t , color = "log(r(t) + 1)")) +
-  scale_color_manual(values = c("P(t,T)" = "red", "log(r(t) + 1)" = "blue")) +
+  geom_line(aes(y = r_t , color = "r(t)")) +
+  scale_color_manual(values = c("P(t,T)" = "red", "r(t)" = "blue")) +
   labs(title = "Dynamika P(t,T) v závislosti od r(t)",
        x = "rok") +
   theme_minimal() + 
@@ -230,15 +230,15 @@ S0 <- btcDailyPrice[1]
 #gbm <- gbm_loop(nsim = nsim, t = t, mu = mu, sigma = sigma, S0 = S0, dt = dt)
 
 # plot the gbm_df data
-p <- ggplot(gbm, aes(x = ix, y = price, color = sim)) +
-  geom_line(size = 0.25) +  
-  theme(legend.position = 'none') +
-  xlab("t") +  
-  ylab("S(t)") +  
-  ylim(0, 50000)  
+# p <- ggplot(gbm, aes(x = ix, y = price, color = sim)) +
+#  geom_line(size = 0.25) +  
+#  theme(legend.position = 'none') +
+#  xlab("t") +  
+#  ylab("S(t)") +  
+#  ylim(0, 50000)  
 
 
-p
+# p
 
 
 
