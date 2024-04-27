@@ -15,6 +15,9 @@
 ## [algorithm](https://github.com/devAdam117/futures-trading-strategies-bitcoin-dp/tree/main/main/src/tradingStartegies/algorithm)
 - directory which owns the core logic for each strategy
 
+## [data](https://github.com/devAdam117/bitcoin-futures-trading-strategies/tree/main/main/src/tradingStartegies/data)
+- contains multiple folders but mainly *.csv formatted datasets mostly used as a core for trading strategies logic, sometimes used also for calibration purposes
+
 ## [reports](https://github.com/devAdam117/futures-trading-strategies-bitcoin-dp/tree/main/main/src/tradingStartegies/reports)
 - contains detailed result from using our calibrated strategy on test data as  HTML file which is interactive view for the whole strategy progression, [for example](https://uno-uno.netlify.app)
 

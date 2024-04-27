@@ -11,7 +11,7 @@ import numpy as np
 import backtesting
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-date_string = '231229'
+date_string = '220325'
 contactt_data = pd.read_csv(f'./data/arbitrageDataCheck/futures{date_string}.csv', parse_dates=True, infer_datetime_format=True)
 contactt_data['spot_price'] = pd.read_csv(f'./data/arbitrageDataCheck/btcSpot{date_string}.csv')['Close']
 contactt_data['theoretical_futures'] = pd.read_csv(f'./data/klam/theoreticalFutures{date_string}.csv')['Close']
