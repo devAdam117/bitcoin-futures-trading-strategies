@@ -7,7 +7,7 @@ weirdTheta <- mleVasicek$thetha
 weirdSigma <- mleVasicek$sigma
 
 saveGIF({
-  for (weirdAlpha in seq(0.01, 3, by = 0.01)) {
+  for (weirdAlpha in seq(0.01, 4, by = 0.01)) {
     sigma_t <- sqrt(weirdSigma^2 * (T - t) - 2 * weirdSigma^2 * (1 - exp(-(T - t))) + weirdSigma^2 * (1 - exp(-2*(T - t))))
     P_t <- exp(
       - ((weirdTheta / weirdAlpha) * (T - t) +
@@ -15,6 +15,7 @@ saveGIF({
            1/2 * sigma_t^2)
     )
     theoreticalFuturesPrice <- futuresPrice(exchangeSpotDataClose, P_t , weirdSigma, weirdAlpha, 1, sigHat, corHat, t)
+    theorethicalForwardPrice <- exchangeSpotDataClose / P_t
     data <- data.frame(t, exchangeSpotDataClose, exchangeFutureClosePrice, theoreticalFuturesPrice, theorethicalForwardPrice)
     plotResult <- ggplot(data) +
       geom_line(aes(x = t, y = exchangeFutureClosePrice, color = 'Burzová cena f_t'), linetype = 'solid') +
@@ -45,13 +46,14 @@ weirdTheta <- mleVasicek$thetha
 weirdSigma <- mleVasicek$sigma
 
 saveGIF({
-  for (weirdTheta in seq(0.1, 3, by = 0.01)) {
+  for (weirdTheta in seq(0.1, 4, by = 0.01)) {
     sigma_t <- sqrt(weirdSigma^2 * (T - t) - 2 * weirdSigma^2 * (1 - exp(-(T - t))) + weirdSigma^2 * (1 - exp(-2*(T - t))))
     P_t <- exp(
       - ((weirdTheta / weirdAlpha) * (T - t) +
            1/weirdAlpha * (rateClose - weirdTheta / weirdAlpha) * (1 - exp(-weirdAlpha * (T - t))) -
            1/2 * sigma_t^2)
     )
+    theorethicalForwardPrice <- exchangeSpotDataClose / P_t
     theoreticalFuturesPrice <- futuresPrice(exchangeSpotDataClose, P_t , weirdSigma, weirdAlpha, 1, sigHat, corHat, t)
     data <- data.frame(t, exchangeSpotDataClose, exchangeFutureClosePrice, theoreticalFuturesPrice, theorethicalForwardPrice)
     plotResult <- ggplot(data) +
@@ -83,7 +85,7 @@ weirdTheta <- mleVasicek$thetha
 weirdSigma <- mleVasicek$sigma
 
 saveGIF({
-  for (weirdSigma in seq(0.01, 3, by = 0.01)) {
+  for (weirdSigma in seq(0.01, 4, by = 0.01)) {
     sigma_t <- sqrt(weirdSigma^2 * (T - t) - 2 * weirdSigma^2 * (1 - exp(-(T - t))) + weirdSigma^2 * (1 - exp(-2*(T - t))))
     P_t <- exp(
       - ((weirdTheta / weirdAlpha) * (T - t) +
@@ -91,6 +93,7 @@ saveGIF({
            1/2 * sigma_t^2)
     )
     theoreticalFuturesPrice <- futuresPrice(exchangeSpotDataClose, P_t , weirdSigma, weirdAlpha, 1, sigHat, corHat, t)
+    theorethicalForwardPrice <- exchangeSpotDataClose / P_t
     data <- data.frame(t, exchangeSpotDataClose, exchangeFutureClosePrice, theoreticalFuturesPrice, theorethicalForwardPrice)
     plotResult <- ggplot(data) +
       geom_line(aes(x = t, y = exchangeFutureClosePrice, color = 'Burzová cena f_t'), linetype = 'solid') +
