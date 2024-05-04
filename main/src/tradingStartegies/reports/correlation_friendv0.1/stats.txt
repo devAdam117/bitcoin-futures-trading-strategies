@@ -2,32 +2,30 @@
 
 
 
-Start                     2022-03-31 04:00:00
+Using safe area width: 0.008 with take_profit: 0.02 and stop_lost: 0.02
+Start                     2022-10-31 12:00:00
 End                       2024-01-31 23:45:00
-Duration                    671 days 19:45:00
-Exposure Time [%]                    14.42428
-Equity Final [$]                 1018690.8994
-Equity Peak [$]                   1034393.675
-Return [%]                            1.86909
-Buy & Hold Return [%]               -9.638196
-Return (Ann.) [%]                    1.020063
-Volatility (Ann.) [%]                2.802698
-Sharpe Ratio                         0.363958
-Sortino Ratio                        0.559259
-Calmar Ratio                         0.302427
-Max. Drawdown [%]                   -3.372924
-Avg. Drawdown [%]                    -0.34881
-Max. Drawdown Duration      245 days 05:15:00
-Avg. Drawdown Duration       18 days 17:11:00
-# Trades                                  313
-Win Rate [%]                        52.076677
+Duration                    457 days 11:45:00
+Exposure Time [%]                   16.878415
+Equity Final [$]                  1038325.804
+Equity Peak [$]                  1054119.1126
+Return [%]                            3.83258
+Buy & Hold Return [%]              106.003359
+Return (Ann.) [%]                    3.059664
+Volatility (Ann.) [%]                2.763558
+Sharpe Ratio                         1.107147
+Sortino Ratio                        2.145371
+Calmar Ratio                         1.734606
+Max. Drawdown [%]                   -1.763895
+Avg. Drawdown [%]                   -0.245984
+Max. Drawdown Duration      104 days 01:45:00
+Avg. Drawdown Duration        7 days 10:56:00
+# Trades                                  202
+Win Rate [%]                        53.465347
 Best Trade [%]                       1.818196
-Worst Trade [%]                     -5.402402
-Avg. Trade [%]                      -0.044802
+Worst Trade [%]                     -2.215671
+Avg. Trade [%]                       0.036584
 Max. Trade Duration           8 days 05:30:00
-Avg. Trade Duration           0 days 08:50:00
-Profit Factor                        0.969934
-Expectancy [%]                      -0.027226
 
 
 

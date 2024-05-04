@@ -101,7 +101,7 @@ p <- ggplot(df, aes(x = Time)) +
   labs(title = "Dynamika P(t,T) v závislosti od r(t)",
        x = "rok") +
   theme_minimal() + 
-  scale_y_continuous("log(r(t) + 1)", sec.axis = sec_axis(~ (. + 1), name = "P(t,T)"))
+  scale_y_continuous("r(t)", sec.axis = sec_axis(~ (. + 1), name = "P(t,T)"))
 # P_t + r_t
 p + theme( axis.line.y.right = element_line(color = "red")) + theme(axis.line.y.left = element_line(color = "blue"))
 dev.off()

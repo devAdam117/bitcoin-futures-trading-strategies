@@ -23,7 +23,7 @@ saveGIF({
       geom_line(aes(x = t, y = theorethicalForwardPrice, color = 'Teoretická cena F_t'), linetype = 'solid') +
       geom_line(aes(x = t, y = theoreticalFuturesPrice, color = 'Teoretická cena f_t'), linetype = 'solid') +
       labs(
-        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 3), ", weirdTheta =", round(weirdTheta, 3), ", weirdSigma =", round(weirdSigma, 3), ")"),
+        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 5), ", weirdTheta =", round(weirdTheta, 5), ", weirdSigma =", round(weirdSigma, 5), ")"),
         x = "t",
         y = "cena",
         caption = "Porovnanie vývoja cien"
@@ -46,7 +46,7 @@ weirdTheta <- mleVasicek$thetha
 weirdSigma <- mleVasicek$sigma
 
 saveGIF({
-  for (weirdTheta in seq(0.1, 4, by = 0.01)) {
+  for (weirdTheta in seq(-1, 1, by = 0.01)) {
     sigma_t <- sqrt(weirdSigma^2 * (T - t) - 2 * weirdSigma^2 * (1 - exp(-(T - t))) + weirdSigma^2 * (1 - exp(-2*(T - t))))
     P_t <- exp(
       - ((weirdTheta / weirdAlpha) * (T - t) +
@@ -62,7 +62,7 @@ saveGIF({
       geom_line(aes(x = t, y = theorethicalForwardPrice, color = 'Teoretická cena F_t'), linetype = 'solid') +
       geom_line(aes(x = t, y = theoreticalFuturesPrice, color = 'Teoretická cena f_t'), linetype = 'solid') +
       labs(
-        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 3), ", weirdTheta =", round(weirdTheta, 3), ", weirdSigma =", round(weirdSigma, 3), ")"),
+        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 5), ", weirdTheta =", round(weirdTheta, 5), ", weirdSigma =", round(weirdSigma, 5), ")"),
         x = "t",
         y = "cena",
         caption = "Porovnanie vývoja cien"
@@ -101,7 +101,7 @@ saveGIF({
       geom_line(aes(x = t, y = theorethicalForwardPrice, color = 'Teoretická cena F_t'), linetype = 'solid') +
       geom_line(aes(x = t, y = theoreticalFuturesPrice, color = 'Teoretická cena f_t'), linetype = 'solid') +
       labs(
-        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 3), ", weirdTheta =", round(weirdTheta, 3), ", weirdSigma =", round(weirdSigma, 3), ")"),
+        title = paste("Porovnanie cien (weirdAlpha =", round(weirdAlpha, 5), ", weirdTheta =", round(weirdTheta, 5), ", weirdSigma =", round(weirdSigma, 5), ")"),
         x = "t",
         y = "cena",
         caption = "Porovnanie vývoja cien"

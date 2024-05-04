@@ -6,7 +6,7 @@ from datetime import datetime
 from dateutil import relativedelta
 
 class ArbiCheck(Strategy):
-    short_rate = 0.0393
+    short_rate = 0.0
     fees = 0.002
 
     # used internally
@@ -40,7 +40,7 @@ class ArbiCheck(Strategy):
         if self.last_date_time == self.data.index[-1]:
             print("We reached the maturity of futures contract all setlemenets will be handled ....")
             print("But we care only about the lent - debt difference")
-            print(f"Lent: {self.lent}, Debt: {self.debt}, total profit: {self.lent - self.debt}, yield: {(self.lent - self.debt) / self.initial_equity}, number of trades: {self.count}")
+            print(f"Lent: {self.lent}, Debt: {self.debt}, total profit: {self.lent - self.debt}, yield (init equity): {(self.lent - self.debt) / self.initial_equity}, yield (by debt): {(self.lent - self.debt)/ self.debt} number of trades: {self.count}")
          
         current_contract_price = self.data['Close'][-1]
         current_spot_price = self.spot_price[-1]
@@ -48,14 +48,16 @@ class ArbiCheck(Strategy):
             return
         debt_interval = self.year_difference(self.data.index[-1], self.last_date_time)
         short_rate_for_interval = self.short_rate * debt_interval
-        all_fees = (current_spot_price * (short_rate_for_interval + self.fees) + current_contract_price * self.fees + self.eps)
-        if current_contract_price - current_spot_price <= all_fees:
+        pi_i = current_contract_price - ( current_spot_price * (1 + short_rate_for_interval) ) - ( current_spot_price * self.fees * (1 + short_rate_for_interval) ) - ( current_contract_price * self.fees * (1 + short_rate_for_interval) )
+        
+        if pi_i <= self.eps:
             return
         
         self.count += 1
-       
-        self.debt += current_spot_price * (1 + short_rate_for_interval)
-        self.lent += current_contract_price * (1 - 2 * self.fees)
+        about_to_debt = (current_spot_price * (1 + self.fees) + current_contract_price * self.fees) * (1 + short_rate_for_interval)
+        self.debt += about_to_debt
+        self.lent += current_contract_price
+        print(f'Current count of trades: {self.count}, current new debt: {about_to_debt}, current new lent: {current_contract_price}, current profit: {current_contract_price - about_to_debt}')
         # This is only for graphical purposes to see how many times we have traded ( the size is not relevant here), even though not all trades are displayed ... we cache them by ourselves
         self.sell(
             size=1,
